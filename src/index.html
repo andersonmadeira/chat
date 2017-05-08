@@ -4,11 +4,25 @@
   <meta charset="utf-8">
   <title>Chat</title>
   <base href="/">
-
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
   <app-root>Loading...</app-root>
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBLs717agDSSAwGGTAj-NKl6_yJGNTvoZ0",
+      authDomain: "mensageiro-1dc58.firebaseapp.com",
+      databaseURL: "https://mensageiro-1dc58.firebaseio.com",
+      projectId: "mensageiro-1dc58",
+      storageBucket: "mensageiro-1dc58.appspot.com",
+      messagingSenderId: "899927886201"
+    };
+    firebase.initializeApp(config);
+  </script>
 </body>
 </html>

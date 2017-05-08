@@ -4,6 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { AngularFireModule } from 'angularfire2';
+
+// Must export the config
+export const fbConfig = {
+  apiKey: '<your-key>',
+  authDomain: '<your-project-authdomain>',
+  databaseURL: '<your-database-URL>',
+  storageBucket: '<your-storage-bucket>',
+  messagingSenderId: '<your-messaging-sender-id>'
+};
 
 @NgModule({
   declarations: [
@@ -12,7 +22,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AngularFireModule.initializeApp(fbConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
