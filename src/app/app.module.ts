@@ -9,12 +9,17 @@ import { AngularFireModule } from "angularfire2/angularfire2";
 
 import { AngularFirebase2Service } from './angular-firebase2/angular-firebase2.service';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ChatComponent } from './chat/chat.component';
+
+import { SlimScrollModule } from 'ng2-slimscroll';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: ChatComponent },
   { path: 'login', component: LoginComponent }
 ]
 
@@ -32,14 +37,17 @@ export const fbConfig = {
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    ChatComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    SlimScrollModule,
     RouterModule.forRoot(routes),
-    AngularFireModule.initializeApp(fbConfig)
+    AngularFireModule.initializeApp(fbConfig),
+    TabsModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [AngularFirebase2Service, AngularFireAuth],
   bootstrap: [AppComponent]

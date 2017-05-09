@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <div (click)="$event.preventDefault()">
+        <tabset>
+          <tab heading="Global">
+            content
+          </tab>
+          <tab *ngFor="let tabz of tabs"
+              [heading]="tabz.title"
+              [active]="tabz.active"
+              (select)="tabz.active = true"
+              (deselect)="tabz.active = false"
+              [disabled]="tabz.disabled"
+              [removable]="tabz.removable"
+              (removed)="removeTabHandler(tabz)"
+              [customClass]="tabz.customClass">
+            <div [innerHTML]="tabz.content">
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div id="friends-panel" class="panel panel-primary" >
+        <div class="panel-heading">
+          <h3 class="panel-title">Amigos&nbsp;&nbsp;&nbsp;<span class="badge pull-right">{{ usersOnline.length }}</span></h3>
+        </div>
+        <div id="friend-list" class="panel-body" slimScroll [options]="opts">
+          <ul>
+            <li *ngFor="let u of usersOnline">
+              <a href="#{{ u.uid }}"> {{ u.displayName }} </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+#friend-list {
+    height: 200px !important;
+}
+
+.panel-primary {
+    border-color: #333333;
+}
+
+.panel-heading {
+    border-color: #333333;
+    background-color: #333333;
+}
+
+.tnav .navbar .container { height: 28px; }
+
+#friend-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#friend-list ul li {
+    width: 100%;
+    display: inline-block;
+    font-size: 15px;
+    padding: 5px 0px;
+    margin: 2px 0px;
+}
+
+#friend-list ul li a:hover {
+    text-decoration: none;
+}

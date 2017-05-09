@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   constructor(public afb: AngularFirebase2Service, private router: Router) { }
 
   login() {
-    this.afb.login().then((data) => {
+    this.afb.loginWithGoogle().then((data) => {
       this.router.navigate(['']); // send user to home
     });
   }

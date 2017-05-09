@@ -1,6 +1,7 @@
 import { AngularFirebase2Service } from './angular-firebase2/angular-firebase2.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -8,26 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public isLoggedIn: boolean;
+  public user: firebase.User = null;
   title = 'app works!';
 
   constructor(public afb: AngularFirebase2Service, private router: Router) {
     this.afb.subscribe(
-      (auth) => {
-        console.log('Logged in');
-        console.log(auth);
-        
+      (auth: firebase.User) => {
+        this.user = auth;
         this.router.navigate(['']);
-        this.isLoggedIn = true;
+        console.log(this.user);
       }, 
       () => {
-        console.log('NOT Logged in');
         this.router.navigate(['login']);
-        this.isLoggedIn = false;
+        this.user = null;
       });
   }
 
   logout() {
     this.afb.logout();
+  }
+
+  isLoggedIn() {
+    return this.user != null;
   }
 }

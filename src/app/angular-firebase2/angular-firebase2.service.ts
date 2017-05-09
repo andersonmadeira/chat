@@ -13,8 +13,12 @@ export class AngularFirebase2Service {
     this.user = afAuth.authState;
   }
 
-  login() {
+  loginWithGoogle() {
     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  loginWithFacebook() {
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
 
   logout() {

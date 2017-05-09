@@ -5,9 +5,16 @@
       <a class="navbar-brand" href="#">Mensageiro</a>
     </div>
     
-    <div *ngIf="isLoggedIn" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div *ngIf="isLoggedIn()" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a (click)="logout()">Logout</a></li>
+        <li  dropdown>
+            <a href="#?" dropdownToggle class=" dropdown-toggle">{{ user.displayName ? user.displayName : user.email }} <span class="caret"></span></a>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem"><a class="dropdown-item" href="#">Perfil</a></li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem"><a class="dropdown-item" href="#" (click)="logout()">Sair</a></li>
+            </ul>
+        </li>
       </ul>
     </div>
   </div>
