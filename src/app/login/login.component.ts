@@ -11,8 +11,14 @@ export class LoginComponent implements OnInit {
 
   constructor(public afb: AngularFirebase2Service, private router: Router) { }
 
-  login() {
+  loginWithGoogle() {
     this.afb.loginWithGoogle().then((data) => {
+      this.router.navigate(['']); // send user to home
+    });
+  }
+
+  loginWithFacebook() {
+    this.afb.loginWithFacebook().then((data) => {
       this.router.navigate(['']); // send user to home
     });
   }
