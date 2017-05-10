@@ -2,21 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from "angularfire2/angularfire2";
-
 import { AngularFirebase2Service } from './angular-firebase2/angular-firebase2.service';
 import { LoginComponent } from './login/login.component';
-
 import { RouterModule, Routes } from '@angular/router';
-
-import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChatComponent } from './chat/chat.component';
-
 import { SlimScrollModule } from 'ng2-slimscroll';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 const routes: Routes = [
   { path: '', component: ChatComponent },
@@ -47,7 +43,8 @@ export const fbConfig = {
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(fbConfig),
     TabsModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [AngularFirebase2Service, AngularFireAuth],
   bootstrap: [AppComponent]

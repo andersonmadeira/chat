@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirebase2Service } from './../angular-firebase2/angular-firebase2.service';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,8 @@ import { AngularFirebase2Service } from './../angular-firebase2/angular-firebase
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  public alert: any = null;
 
   constructor(public afb: AngularFirebase2Service, private router: Router) { }
 
@@ -25,32 +28,37 @@ export class LoginComponent implements OnInit {
 
   tryLoginOrRegister(email: string, password: string) {
     this.afb.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .catch(function(error) {
+    .catch( (error: firebase.FirebaseError) => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode === 'auth/invalid-email') {
-        alert('O email informado é inválido!');
-      } else if (errorCode == 'auth/user-disabled') {
-        alert('Conta foi removida!');
-      } else if (errorCode == 'auth/wrong-password') {
-        alert('Senha inválida!');
-      } else if (errorCode == 'auth/user-not-found') {
+      if (error.code === 'auth/invalid-email') {
+        this.setAlert('O email informado é inválido!');
+      } else if (error.code == 'auth/user-disabled') {
+        this.setAlert('Conta foi removida!');
+      } else if (error.code == 'auth/wrong-password') {
+        this.setAlert('Senha inválida!');
+      } else if (error.code == 'auth/user-not-found') {
+        this.setAlert('Usuário inexistente! Criando novo!');
         this.afb.afAuth.auth.createUserWithEmailAndPassword(email, password).
-          catch(function(error) {
+          catch( (error: firebase.FirebaseError) => {
             // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode == 'auth/weak-password') {
-              alert('The password is too weak.');
+            if (error.code == 'auth/weak-password') {
+              this.setAlert('A senha é muito fraca!');
             }
             console.log(error);
           });
-        }
+      }
       console.log(error);
     });
 
 
+  }
+
+  setAlert(pMessage: string, pType: string = 'danger') {
+    this.alert = {type: pType, message: pMessage};
+  }
+
+  onAlertClosed() {
+    this.alert = null;
   }
 
   logout() {

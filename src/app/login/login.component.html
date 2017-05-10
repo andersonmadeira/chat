@@ -1,17 +1,19 @@
 <div class="container signin-container">
 
+  <alert *ngIf="alert != null" (onClosed)="onAlertClosed()" [type]="alert.type" dismissible="true"><span [innerHtml]="alert.message"></span></alert>
+
   <form class="form-signin">
     <h2 class="form-signin-heading text-center"><i class="fa fa-sign-in" aria-hidden="true"></i> Fazer login</h2>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" name="email" [(ngModel)]="formEmail" autofocus="">
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="password" [(ngModel)]="formPassword">
     <div class="checkbox">
       <label>
         <input type="checkbox" value="remember-me"> Lembrar-me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="tryLoginOrRegister(formEmail, formPassword)">Entrar</button>
     <br>
   </form>
 
